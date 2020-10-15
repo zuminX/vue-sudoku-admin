@@ -1,27 +1,93 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Layout from '@/components/Layout'
 
 Vue.use(VueRouter)
 
-const routes = [
+// 所有权限通用路由表
+export const constantRouterMap = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/login/index'),
+    meta: {
+      title: '登录'
+    }
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
   }
 ]
 
-const router = new VueRouter({
-  routes
+// 异步挂载的路由
+export const asyncRouterMap = [
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: {
+        title: '概览',
+        icon: 'dashboard',
+        role: ['ADMIN']
+      }
+    }]
+  },
+  {
+    path: '/info',
+    component: Layout,
+    meta: {
+      title: '信息列表',
+      icon: 'table',
+      role: ['ADMIN']
+    },
+    children: [
+      {
+        path: 'user-table',
+        component: () => import('@/views/infoTable/user-table/index'),
+        meta: {
+          title: '用户列表'
+        }
+      },
+      {
+        path: 'game-record-table',
+        component: () => import('@/views/infoTable/game-record-table/index'),
+        meta: {
+          title: '游戏记录列表'
+        }
+      }
+    ]
+  },
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
+]
+
+export default new VueRouter({
+  mode: 'hash',
+  base: process.env.BASE_URL,
+  routes: constantRouterMap
 })
 
-export default router
+const originalPush = VueRouter.prototype.push
+
+/**
+ * 解决重定向时报错
+ * @param location
+ * @param onResolve
+ * @param onReject
+ * @returns {Promise<Route | *>|Promise<Route>|void}
+ */
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) {
+    return originalPush.call(this, location, onResolve, onReject)
+  }
+  return originalPush.call(this, location).catch(err => err)
+}
