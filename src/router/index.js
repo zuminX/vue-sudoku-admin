@@ -49,19 +49,32 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'user-table',
-        component: () => import('@/views/infoTable/user-table/index'),
+        component: () => import('@/views/info-table/user-table/index'),
         meta: {
           title: '用户列表'
         }
       },
       {
         path: 'game-record-table',
-        component: () => import('@/views/infoTable/game-record-table/index'),
+        component: () => import('@/views/info-table/game-record-table/index'),
         meta: {
           title: '游戏记录列表'
         }
       }
     ]
+  },
+  {
+    path: '/sudokuRace',
+    component: Layout,
+    children: [{
+      path: '',
+      name: 'SudokuRace',
+      component: () => import('@/views/sudoku-race/index'),
+      meta: {
+        title: '数独竞赛',
+        icon: 'race'
+      }
+    }]
   },
   {
     path: '*',

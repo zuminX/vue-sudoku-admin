@@ -10,28 +10,11 @@ const base = '/user'
 
 /**
  * 获取用户的游戏信息
- */
-export const getUserGameInformation = () => {
-  return getRequest(`${base}/gameInformation`)
-}
-
-/**
- * 获取用户的游戏信息
  *
  * @param userId 用户ID
  */
 export const getUserGameInformationById = (userId) => {
   return getRequest(`${base}/gameInformationById`, { userId })
-}
-
-/**
- * 获取历史游戏记录
- *
- * @param page 当前查询页
- * @param pageSize 每页显示的条数
- */
-export const getHistoryGameRecord = (page, pageSize) => {
-  return getRequest(`${base}/historyGameRecord`, { page, pageSize })
 }
 
 /**

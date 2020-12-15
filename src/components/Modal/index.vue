@@ -22,6 +22,7 @@ export default {
     }
   },
   mounted() {
+    // 若传入formId，则使用表单校验的功能
     if (this.formId !== '') {
       $(`#${this.modalId}`).modal({
         closable: false,

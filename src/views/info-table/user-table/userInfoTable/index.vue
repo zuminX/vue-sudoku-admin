@@ -87,8 +87,17 @@ export default {
     }
   },
   watch: {
-    mode() {
-      this.updateCurrentPageData()
+    /**
+     * 监听搜索名称的改变
+     */
+    searchName() {
+      this.refreshUserInfoTable()
+    },
+    /**
+     * 监听搜索用户的改变
+     */
+    searchUser() {
+      this.refreshUserInfoTable()
     }
   },
   mounted() {
@@ -97,6 +106,12 @@ export default {
   methods: {
     parseStringTime,
     roleListHasAdmin,
+    /**
+     * 更新当前分页数据
+     * @param page 当前页
+     * @param pageSize 每页大小
+     * @returns {Promise<void>}
+     */
     async updateCurrentPageData(page = 1, pageSize = 5) {
       this.loaderShow = true
       const { success, data } = await this.requestUserListByMode(page, pageSize)
@@ -106,6 +121,19 @@ export default {
         this.userList = data.list
       }
     },
+    /**
+     * 刷新用户信息表格
+     * @returns {Promise<void>}
+     */
+    async refreshUserInfoTable() {
+      await this.updateCurrentPageData(this.pageInformation.currentPage, this.pageInformation.pageSize)
+    },
+    /**
+     * 根据不同模式请求用户列表数据
+     * @param page 当前页
+     * @param pageSize 每页大小
+     * @returns {AxiosPromise<any>} 请求对象
+     */
     async requestUserListByMode(page, pageSize) {
       let request
       switch (this.mode) {

@@ -103,3 +103,27 @@ input::-webkit-inner-spin-button {
   max-width: 50em !important;
   margin: auto !important;
 }
+
+.background-color-gray {
+  background: #ebebe4 !important;
+}
+
+.background-color-white {
+  background: #ffffff !important;
+}
+
+.background-color-blue {
+  background: #66d7fa !important;
+}
+
+.background-color-red {
+  background: red !important;
+}
+
+.border-color-red {
+  border-color: red !important;
+}
+
+.m-opacity-big {
+  opacity: 0.6 !important;
+}

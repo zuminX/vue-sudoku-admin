@@ -77,6 +77,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * 将折线图数据名作为handleSetLineChartData事件的参数向上抛出
+     */
     handleSetLineChartData(type) {
       this.selectDataName = type
       this.$emit('handleSetLineChartData', type)

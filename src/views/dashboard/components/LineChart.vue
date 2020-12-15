@@ -58,10 +58,18 @@ export default {
     this.chart = null
   },
   methods: {
+    /**
+     * 初始化图表
+     */
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
     },
+    /**
+     * 设置参数
+     * @param daily 每日数据
+     * @param eachMonth 每月数据
+     */
     setOptions({ daily, eachMonth } = {}) {
       this.chart.setOption({
         xAxis: {

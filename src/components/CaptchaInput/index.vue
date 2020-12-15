@@ -35,6 +35,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * 获取验证码图片
+     */
     async getCaptchaImage() {
       this.focusIfRefreshOldCaptcha()
       this.clearInput()
@@ -45,11 +48,17 @@ export default {
         this.$emit('update:uuid', data.uuid)
       }
     },
+    /**
+     * 若刷新了旧的验证码，则将焦点设置到验证码的输入框中
+     */
     focusIfRefreshOldCaptcha() {
       if (this.uuid !== '') {
         this.$refs.captchaInput.focus()
       }
     },
+    /**
+     * 清理输入
+     */
     clearInput() {
       this.$emit('update:uuid', '')
       this.input = ''

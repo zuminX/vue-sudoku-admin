@@ -88,6 +88,7 @@ module.exports = {
       }
     }))
   },
+  publicPath: production ? '/admin/' : '/',
   // 测试时的端口和反向代理到服务器
   devServer: {
     host: 'localhost',

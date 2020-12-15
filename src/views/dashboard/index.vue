@@ -62,6 +62,9 @@ export default {
     this.handleSetLineChartData('newUserTotal')
   },
   methods: {
+    /**
+     * 设置折线图的数据
+     */
     handleSetLineChartData(type) {
       this.selectChartData = this.chartData[type]
     },

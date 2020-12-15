@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { getDefaultPageInformation } from '@/components/PaginationMenu/PaginationMenu'
+
 export default {
   name: 'PaginationMenu',
   props: {
@@ -23,13 +25,12 @@ export default {
     }
   },
   data() {
-    return {
-      currentPage: 1,
-      pageSize: 5,
-      totalPage: 0
-    }
+    return getDefaultPageInformation()
   },
   watch: {
+    /**
+     * 监听分页信息对象的改变，并同步更改到该组件的数据中
+     */
     pageInformation() {
       const information = this.pageInformation
       if (information) {

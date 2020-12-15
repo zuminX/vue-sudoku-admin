@@ -9,27 +9,28 @@
         <i class="search icon" />
         高级搜索
       </button>
-      <button class="ui blue right floated button" @click="insertUser">插入用户</button>
+      <button class="ui blue right floated button" @click="insertUser">新增用户</button>
     </div>
     <UserInfoTable
+      ref="userInfoTable"
       :mode="mode"
       :search-name="searchName"
       :search-user="searchUser"
       @clickEdit="handleEditUser"
       @clickGameDetail="handleShowGameDetail"
     />
-    <SaveUserModal :user="editUser" />
+    <SaveUserModal :user="editUser" @saveUserSuccess="refreshUserInfoTable" />
     <ConditionSearchModal @search="searchByCondition" />
     <UserGameDetailModal :user-id="showDetailId" />
   </div>
 </template>
 
 <script>
-import SaveUserModal from '@/views/infoTable/user-table/components/SaveUseModal'
-import UserInfoTable from '@/views/infoTable/user-table/components/UserInfoTable'
+import SaveUserModal from '@/views/info-table/user-table/saveUserModal/index'
+import UserInfoTable from '@/views/info-table/user-table/userInfoTable/index'
 import { showModal } from '@/components/Modal/Modal'
-import ConditionSearchModal from '@/views/infoTable/user-table/components/ConditionSearchModal'
-import UserGameDetailModal from '@/views/infoTable/user-table/components/UserGameDetailModal'
+import ConditionSearchModal from '@/views/info-table/user-table/conditionSearchModal/index'
+import UserGameDetailModal from '@/views/info-table/user-table/userGameDetailModal/index'
 
 export default {
   name: 'UserTable',
@@ -45,24 +46,48 @@ export default {
   },
   methods: {
     showModal,
+    /**
+     * 修改用户
+     * @param user 待修改的用户
+     */
     handleEditUser(user) {
       this.editUser = user
       showModal('saveUserModal')
     },
+    /**
+     * 新增用户
+     */
     insertUser() {
       this.editUser = null
       showModal('saveUserModal')
     },
+    /**
+     * 根据名称查询用户
+     */
     searchByName() {
       this.mode = 'name'
     },
+    /**
+     * 根据查询条件查询用户
+     * @param searchUser 查询条件
+     */
     searchByCondition(searchUser) {
-      this.searchUser = searchUser
       this.mode = 'condition'
+      this.searchUser = searchUser
     },
+    /**
+     * 显示指定用户的游戏详情
+     * @param id 用户ID
+     */
     handleShowGameDetail(id) {
       this.showDetailId = id
       showModal('userGameDetailModal')
+    },
+    /**
+     * 刷新用户信息表格
+     */
+    refreshUserInfoTable() {
+      this.$refs.userInfoTable.refreshUserInfoTable()
     }
   }
 }

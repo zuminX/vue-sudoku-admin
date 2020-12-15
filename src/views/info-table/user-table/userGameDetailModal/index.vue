@@ -25,8 +25,8 @@
 import BasicModalHeader from '@/components/Modal/header/BasicModalHeader'
 import Modal from '@/components/Modal/index'
 import OKModalActions from '@/components/Modal/actions/OKModalActions'
-import UserGameInformationList from '@/components/UserGameInformationList/index'
-import UserGameRecordTable from '@/components/UserGameRecordTable/index'
+import UserGameInformationList from '@/views/info-table/user-table/userGameDetailModal/components/UserGameInformationList'
+import UserGameRecordTable from '@/views/info-table/user-table/userGameDetailModal/components/UserGameRecordTable'
 
 export default {
   name: 'UserGameDetailModal',
@@ -39,7 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

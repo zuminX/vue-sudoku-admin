@@ -24,6 +24,9 @@ export default {
     }
   },
   watch: {
+    /**
+     * 监听show属性，若其发生变化则改变调光器的显示状态
+     */
     show() {
       this.changeItemListDimmer()
     }
@@ -31,8 +34,8 @@ export default {
   methods: {
     createUniqueString,
     /**
-       * 改变列表项的调光器的显示状态
-       */
+     * 改变列表项的调光器的显示状态
+     */
     changeItemListDimmer() {
       $(`#${this.loaderId}`).dimmer(this.show ? 'show' : 'hide')
     }

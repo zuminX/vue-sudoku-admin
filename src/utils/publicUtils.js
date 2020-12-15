@@ -73,16 +73,16 @@ export const deepClone = (data) => {
  * 获取二维number型数组
  * @returns {number[][]} 二维number型数组
  */
-export const getTwoDimeNumArray = (row = 9, column = 9) => {
-  return getTwoDimeArray(row, column, 0)
+export const getTwoDimeNumArray = (row = 9, column = 9, initValue = 0) => {
+  return getTwoDimeArray(row, column, initValue)
 }
 
 /**
  * 获取二维boolean型数组
  * @returns {boolean[][]} 二维boolean型数组
  */
-export const getTwoDimeBoolArray = (row = 9, column = 9) => {
-  return getTwoDimeArray(row, column, false)
+export const getTwoDimeBoolArray = (row = 9, column = 9, initValue = false) => {
+  return getTwoDimeArray(row, column, initValue)
 }
 
 /**

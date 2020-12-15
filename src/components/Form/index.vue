@@ -20,14 +20,26 @@ export default {
     validateRule: {
       type: Object,
       default: null
+    },
+    successCallback: {
+      type: Function,
+      default: null
     }
   },
   mounted() {
     // 加载注册表单验证规则
     if (this.validateRule) {
       this.$nextTick(() => {
-        FormValidation.init(this.formId, this.validateRule)
+        FormValidation.init(this.formId, this.validateRule, this.successCallback)
       })
+    }
+  },
+  methods: {
+    /**
+     * 校验表单
+     */
+    validaForm() {
+      FormValidation.validateForm(this.formId)
     }
   }
 }

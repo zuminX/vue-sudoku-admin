@@ -59,7 +59,6 @@ import {
   convertToSudokuMatrix
 } from '@/utils/sudokuUtils'
 import {
-  getHistoryGameRecord,
   getHistoryGameRecordById
 } from '@/api/userApi'
 import PaginationMenu from '@/components/PaginationMenu/index'
@@ -70,7 +69,7 @@ export default {
   props: {
     userId: {
       type: Number,
-      default: null
+      required: true
     }
   },
   data() {
@@ -81,6 +80,9 @@ export default {
     }
   },
   watch: {
+    /**
+     * 监听用户ID的改变
+     */
     userId() {
       if (this.userId && this.userId !== 0) {
         this.updateCurrentPageData()
@@ -96,16 +98,13 @@ export default {
      */
     async updateCurrentPageData(page = 1, pageSize = 5) {
       this.loaderShow = true
-      const { success, data } = await this.requestUserGameRecord(page, pageSize)
+      const { success, data } = await getHistoryGameRecordById(this.userId, page, pageSize)
       this.loaderShow = false
       if (success) {
         this.recordData = this.convertGameRecordToMatrix(data.list)
         this.pageInformation = data.pageInformation
         this.scrollToHeader()
       }
-    },
-    async requestUserGameRecord(page, pageSize) {
-      return this.userId ? getHistoryGameRecordById(this.userId, page, pageSize) : getHistoryGameRecord(page, pageSize)
     },
     /**
      * 转换游戏记录中的数独矩阵和空缺字符串为二维数组
@@ -140,26 +139,5 @@ export default {
 /*用户输入数独框的颜色*/
 .input-color {
   background-color: #c4e3ff;
-}
-
-/*数独行*/
-.sudoku-row::after {
-  content: "";
-  clear: both;
-  display: block;
-}
-
-.background-color-gray {
-  background: #ebebe4 !important;
-}
-
-/*数独数字输入框*/
-.sudoku-number-input {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 1.5em;
-  font-weight: bold;
-  border: 1px solid;
 }
 </style>

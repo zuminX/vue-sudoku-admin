@@ -1,3 +1,6 @@
+/**
+ * 表单校验类
+ */
 export class FormValidation {
   /**
    * 校验表单
@@ -14,16 +17,21 @@ export class FormValidation {
    * 初始化表单校验
    * @param selector ID选择器
    * @param fields 字段校验规则
-   * @param transition 过渡动画
+   * @param successCallback 验证成功的回调方法
    */
-  static init(selector, fields, transition = 'slide down') {
+  static init(selector, fields, successCallback) {
     $(`#${selector}`).form({
-      transition,
+      transition: 'slide down',
       fields,
       /**
-       * 防止表单验证成功后自动发送GET请求
+       * 验证成功后的回调方法
        */
       onSuccess() {
+        if (successCallback) {
+          successCallback()
+        }
+        // 防止表单验证成功后自动发送GET请求
+        return false
       }
     })
   }
@@ -37,12 +45,12 @@ export class FormValidation {
   }
 
   /**
-   * 用户校验规则
+   * 用户名校验规则
    */
   static get usernameRules() {
     return this._getRules([
-      this._getTypeAndPrompt('minLength[4]', '用户名的长度不能小于4位'),
-      this._getTypeAndPrompt('maxLength[16]', '用户名的长度不能大于16位')
+      this._getTypeAndPrompt('minLength[4]', '用户名不能少于4个字符'),
+      this._getTypeAndPrompt('maxLength[16]', '用户名不能多于16个字符')
     ])
   }
 
@@ -51,21 +59,27 @@ export class FormValidation {
    */
   static get passwordRules() {
     return this._getRules([
-      this._getTypeAndPrompt('minLength[6]', '密码的长度不能小于6位'),
-      this._getTypeAndPrompt('maxLength[32]', '密码的长度不能大于32位')
+      this._getTypeAndPrompt('minLength[6]', '密码不能少于6个字符'),
+      this._getTypeAndPrompt('maxLength[32]', '密码不能多于32个字符')
     ])
   }
 
+  /**
+   * 重复密码校验规则
+   */
   static get repeatPasswordRules() {
     return this._getRules([
       this._getTypeAndPrompt('match[password]', '重复输入的密码与密码不一致')
     ])
   }
 
+  /**
+   * 昵称校验规则
+   */
   static get nicknameRules() {
     return this._getRules([
-      this._getTypeAndPrompt('minLength[4]', '昵称的长度不能小于4位'),
-      this._getTypeAndPrompt('maxLength[32]', '昵称的长度不能大于32位')
+      this._getTypeAndPrompt('minLength[4]', '昵称不能少于4个字符'),
+      this._getTypeAndPrompt('maxLength[32]', '昵称不能多于32个字符')
     ])
   }
 
@@ -75,6 +89,25 @@ export class FormValidation {
   static get captchaRules() {
     return this._getRules([
       this._getTypeAndPrompt('exactLength[4]', '验证码的长度必须为4位')
+    ])
+  }
+
+  /**
+   * 竞赛标题校验规则
+   */
+  static get raceTitleRules() {
+    return this._getRules([
+      this._getTypeAndPrompt('minLength[4]', '竞赛标题不能少于4个字符'),
+      this._getTypeAndPrompt('maxLength[64]', '竞赛标题不能多于64个字符')
+    ])
+  }
+
+  /**
+   * 竞赛描述校验规则
+   */
+  static get raceDescriptionRules() {
+    return this._getRules([
+      this._getTypeAndPrompt('maxLength[512]', '竞赛描述不能多于512个字符')
     ])
   }
 
