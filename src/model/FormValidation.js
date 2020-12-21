@@ -50,7 +50,8 @@ export class FormValidation {
   static get usernameRules() {
     return this._getRules([
       this._getTypeAndPrompt('minLength[4]', '用户名不能少于4个字符'),
-      this._getTypeAndPrompt('maxLength[16]', '用户名不能多于16个字符')
+      this._getTypeAndPrompt('maxLength[16]', '用户名不能多于16个字符'),
+      this._getTypeAndPrompt('regExp[/^[0-9a-zA-Z]+$/]', '用户名只能是数字和字母的组合')
     ])
   }
 
@@ -60,7 +61,8 @@ export class FormValidation {
   static get passwordRules() {
     return this._getRules([
       this._getTypeAndPrompt('minLength[6]', '密码不能少于6个字符'),
-      this._getTypeAndPrompt('maxLength[32]', '密码不能多于32个字符')
+      this._getTypeAndPrompt('maxLength[32]', '密码不能多于32个字符'),
+      this._getTypeAndPrompt('regExp[/^[0-9a-zA-Z]+$/]', '密码只能是数字和字母的组合')
     ])
   }
 
@@ -88,7 +90,8 @@ export class FormValidation {
    */
   static get captchaRules() {
     return this._getRules([
-      this._getTypeAndPrompt('exactLength[4]', '验证码的长度必须为4位')
+      this._getTypeAndPrompt('exactLength[4]', '验证码的长度必须为4位'),
+      this._getTypeAndPrompt('regExp[/^[0-9a-zA-Z]+$/]', '验证码中只包括数字和字母')
     ])
   }
 
