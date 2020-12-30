@@ -77,6 +77,19 @@ export const asyncRouterMap = [
     }]
   },
   {
+    path: 'external-link',
+    component: Layout,
+    children: [
+      {
+        path: 'http://47.116.68.80:8082/home',
+        meta: {
+          title: '数独游戏首页',
+          icon: 'link'
+        }
+      }
+    ]
+  },
+  {
     path: '*',
     redirect: '/404',
     hidden: true

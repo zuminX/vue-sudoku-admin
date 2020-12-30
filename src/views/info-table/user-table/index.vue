@@ -2,7 +2,7 @@
   <div>
     <div class="m-padded-t m-padded-lr-large">
       <div class="ui action input">
-        <input v-model="searchName" type="text" placeholder="输入用户的名称">
+        <input v-model="name" type="text" placeholder="输入用户的名称">
         <button class="ui button" @click="searchByName">搜索</button>
       </div>
       <button class="ui teal labeled icon button m-margin-l" @click="showModal('conditionSearchModal')">
@@ -40,6 +40,7 @@ export default {
       editUser: null,
       searchUser: null,
       showDetailId: 0,
+      name: '',
       searchName: '',
       mode: ''
     }
@@ -66,6 +67,7 @@ export default {
      */
     searchByName() {
       this.mode = 'name'
+      this.searchName = this.name
     },
     /**
      * 根据查询条件查询用户

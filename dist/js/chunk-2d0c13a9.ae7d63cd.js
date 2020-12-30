@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["chunk-2d0c13a9"],{"44c6":function(e,n,c){"use strict";c.r(n);var t={name:"GameRecordTable"},c=c("2877"),t=Object(c.a)(t,function(){var e=this.$createElement;return(this._self._c||e)("div")},[],!1,null,null,null);n.default=t.exports}}]);
