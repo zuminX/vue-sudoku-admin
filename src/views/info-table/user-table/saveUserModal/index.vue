@@ -101,8 +101,8 @@ export default {
       const cloneUser = deepClone(this.user)
       cloneUser.createTime = new Date(cloneUser.createTime)
       cloneUser.recentLoginTime = new Date(cloneUser.recentLoginTime)
-      cloneUser.roleNameList = []
       this.initRole = cloneUser.roleList.map(role => role.name)
+      cloneUser.roleNameList = this.initRole
       delete cloneUser.roleList
 
       this.form = cloneUser

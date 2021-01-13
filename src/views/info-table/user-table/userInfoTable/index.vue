@@ -65,39 +65,14 @@ import Loader from '@/components/Loader/index'
 export default {
   name: 'UserInfoTable',
   components: { Loader, PaginationMenu },
-  props: {
-    mode: {
-      type: String,
-      default: ''
-    },
-    searchName: {
-      type: String,
-      default: ''
-    },
-    searchUser: {
-      type: Object,
-      default: null
-    }
-  },
   data() {
     return {
       pageInformation: getDefaultPageInformation(),
       userList: [],
-      loaderShow: false
-    }
-  },
-  watch: {
-    /**
-     * 监听搜索名称的改变
-     */
-    searchName() {
-      this.refreshUserInfoTable()
-    },
-    /**
-     * 监听搜索用户的改变
-     */
-    searchUser() {
-      this.refreshUserInfoTable()
+      loaderShow: false,
+      mode: '',
+      searchName: '',
+      searchUser: null
     }
   },
   mounted() {
@@ -127,6 +102,20 @@ export default {
      */
     async refreshUserInfoTable() {
       await this.updateCurrentPageData(this.pageInformation.currentPage, this.pageInformation.pageSize)
+    },
+    async refreshUserInfoTableByName(name) {
+      this.mode = 'name'
+      this.searchName = name
+      await this.refreshUserInfoTable()
+    },
+    async refreshUserInfoTableByCondition(user) {
+      this.mode = 'condition'
+      this.searchUser = user
+      await this.refreshUserInfoTable()
+    },
+    async refreshUserInfoTableToLast() {
+      this.mode = ''
+      await this.updateCurrentPageData(2147483647, this.pageInformation.pageSize)
     },
     /**
      * 根据不同模式请求用户列表数据

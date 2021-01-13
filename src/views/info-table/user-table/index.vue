@@ -2,7 +2,7 @@
   <div>
     <div class="m-padded-t m-padded-lr-large">
       <div class="ui action input">
-        <input v-model="name" type="text" placeholder="输入用户的名称">
+        <input v-model="searchName" type="text" placeholder="输入用户的名称">
         <button class="ui button" @click="searchByName">搜索</button>
       </div>
       <button class="ui teal labeled icon button m-margin-l" @click="showModal('conditionSearchModal')">
@@ -13,13 +13,10 @@
     </div>
     <UserInfoTable
       ref="userInfoTable"
-      :mode="mode"
-      :search-name="searchName"
-      :search-user="searchUser"
       @clickEdit="handleEditUser"
       @clickGameDetail="handleShowGameDetail"
     />
-    <SaveUserModal :user="editUser" @saveUserSuccess="refreshUserInfoTable" />
+    <SaveUserModal :user="editUser" @saveUserSuccess="refreshUserInfoTableToLast" />
     <ConditionSearchModal @search="searchByCondition" />
     <UserGameDetailModal :user-id="showDetailId" />
   </div>
@@ -38,11 +35,8 @@ export default {
   data() {
     return {
       editUser: null,
-      searchUser: null,
       showDetailId: 0,
-      name: '',
-      searchName: '',
-      mode: ''
+      searchName: ''
     }
   },
   methods: {
@@ -66,16 +60,14 @@ export default {
      * 根据名称查询用户
      */
     searchByName() {
-      this.mode = 'name'
-      this.searchName = this.name
+      this.$refs.userInfoTable.refreshUserInfoTableByName(this.searchName)
     },
     /**
      * 根据查询条件查询用户
      * @param searchUser 查询条件
      */
     searchByCondition(searchUser) {
-      this.mode = 'condition'
-      this.searchUser = searchUser
+      this.$refs.userInfoTable.refreshUserInfoTableByCondition(searchUser)
     },
     /**
      * 显示指定用户的游戏详情
@@ -86,10 +78,10 @@ export default {
       showModal('userGameDetailModal')
     },
     /**
-     * 刷新用户信息表格
+     * 刷新用户信息表格至最后一页
      */
-    refreshUserInfoTable() {
-      this.$refs.userInfoTable.refreshUserInfoTable()
+    refreshUserInfoTableToLast() {
+      this.$refs.userInfoTable.refreshUserInfoTableToLast()
     }
   }
 }

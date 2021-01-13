@@ -77,7 +77,7 @@ export const asyncRouterMap = [
     }]
   },
   {
-    path: 'external-link',
+    path: '/external-link',
     component: Layout,
     children: [
       {
@@ -112,8 +112,6 @@ const originalPush = VueRouter.prototype.push
  * @returns {Promise<Route | *>|Promise<Route>|void}
  */
 VueRouter.prototype.push = function push(location, onResolve, onReject) {
-  if (onResolve || onReject) {
-    return originalPush.call(this, location, onResolve, onReject)
-  }
-  return originalPush.call(this, location).catch(err => err)
+  return onResolve || onReject ? originalPush.call(this, location, onResolve, onReject) : originalPush.call(this, location).catch(
+    err => err)
 }

@@ -11,9 +11,7 @@
 </template>
 
 <script>
-import {
-  mapGetters
-} from 'vuex'
+import { mapGetters } from 'vuex'
 import PanelGroup from '@/views/dashboard/components/PanelGroup'
 import LineChart from '@/views/dashboard/components/LineChart'
 import {
@@ -75,9 +73,9 @@ export default {
      */
     setUserStatisticsData(requestData, dateType) {
       if (requestData.success) {
-        const { newUserTotalList, activeUserTotalList } = this.extractUserStatisticsData(requestData.data)
-        this.chartData.newUserTotal[dateType] = newUserTotalList
-        this.chartData.activeUserTotal[dateType] = activeUserTotalList
+        const userDataList = requestData.data
+        this.chartData.newUserTotal[dateType] = userDataList.map(({ newUserTotal }) => newUserTotal)
+        this.chartData.activeUserTotal[dateType] = userDataList.map(({ activeUserTotal }) => activeUserTotal)
       }
     },
     /**
@@ -87,26 +85,8 @@ export default {
      */
     setGameStatisticsData(requestData, dateType) {
       if (requestData.success) {
-        const totalList = requestData.data
-        for (let i = totalList.length; i < 7; i++) {
-          totalList.unshift(0)
-        }
-        this.chartData.sudokuGameTotal[dateType] = totalList
+        this.chartData.sudokuGameTotal[dateType] = requestData.data
       }
-    },
-    /**
-     * 提取用户的统计数据，并对空缺数据进行填0处理
-     * @param userDataList 用户数据列表
-     * @returns {{newUserTotalList: *, activeUserTotalList: *}} 统计数据列表
-     */
-    extractUserStatisticsData(userDataList) {
-      const newUserTotalList = userDataList.map(({ newUserTotal }) => newUserTotal)
-      const activeUserTotalList = userDataList.map(({ activeUserTotal }) => activeUserTotal)
-      for (let i = newUserTotalList.length; i < 7; i++) {
-        newUserTotalList.unshift(0)
-        activeUserTotalList.unshift(0)
-      }
-      return { newUserTotalList, activeUserTotalList }
     }
   }
 }

@@ -7,7 +7,7 @@
       <div
         v-for="(role, i) in roleList"
         :key="i"
-        :class="[roleNameHasAdmin(role.name) ? 'disabled' : '']"
+        :class="[disabledAdmin && roleNameHasAdmin(role.name) ? 'disabled' : '']"
         :data-text="role.nameZh"
         :data-value="role.name"
         class="item"
@@ -34,6 +34,10 @@ export default {
       default() {
         return []
       }
+    },
+    disabledAdmin: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -52,6 +56,7 @@ export default {
   },
   async mounted() {
     this.roleList = await constStore.getRoleNameList()
+    this.initRoleDropdown()
   },
   methods: {
     roleNameHasAdmin,

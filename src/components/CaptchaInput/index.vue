@@ -34,6 +34,9 @@ export default {
       input: ''
     }
   },
+  mounted() {
+    this.getCaptchaImage()
+  },
   methods: {
     /**
      * 获取验证码图片

@@ -26,7 +26,7 @@
           />
         </LeftLabeledField>
         <LeftLabeledField label="角色">
-          <RoleDropdown :role-name-list.sync="form.roleNameList" />
+          <RoleDropdown :role-name-list.sync="form.roleNameList" :disabled-admin="false" />
         </LeftLabeledField>
         <div class="inline fields">
           <label>是否启用</label>
