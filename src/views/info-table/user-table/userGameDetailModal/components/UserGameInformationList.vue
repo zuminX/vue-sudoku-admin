@@ -193,7 +193,7 @@ export default {
      */
     calculateMinSpendTime(data) {
       const minSpendTimeData = data.map(item => item.minSpendTime).filter(minSpendTime => minSpendTime !== null)
-      return Math.min.apply(null, minSpendTimeData)
+      return minSpendTimeData.length === 0 ? null : Math.min.apply(null, minSpendTimeData)
     },
     /**
      * 计算最多花费时间
@@ -203,7 +203,7 @@ export default {
      */
     calculateMaxSpendTime(data) {
       const maxSpendTimeData = data.map(item => item.maxSpendTime).filter(maxSpendTime => maxSpendTime !== null)
-      return Math.max.apply(null, maxSpendTimeData)
+      return maxSpendTimeData.length === 0 ? null : Math.max.apply(null, maxSpendTimeData)
     },
     /**
      * 计算游戏总数
