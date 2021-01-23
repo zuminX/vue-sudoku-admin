@@ -99,7 +99,7 @@
 
 <script>
 import {
-  formatShowMS,
+  formatEmptyData,
   initMenuItem
 } from '@/utils/publicUtils'
 import {
