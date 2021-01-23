@@ -13,7 +13,7 @@
             v-for="(level, index) in sudokuLevelList"
             :key="index"
             class="item"
-            @click="$emit('clickSudokuLevel', level.level)"
+            @click="$emit('clickSudokuLevel', level)"
           >
             {{ level.name }}
           </div>

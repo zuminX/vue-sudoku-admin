@@ -11,12 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(record, index) in recordData" :key="index" class="center aligned">
+        <tr v-for="(record, index) in gameRecord" :key="index" class="center aligned">
           <td>
-            <div v-for="(rowData, i) in record.sudokuMatrix" :key="i" class="sudoku-row absolute-center">
+            <div v-for="(rowData, i) in record.sudokuRecord.sudokuMatrix" :key="i" class="sudoku-row absolute-center">
               <div v-for="(data, j) in rowData" :key="j" class="mini-number">
                 <input
-                  :class="[record.sudokuHoles[i][j]?'input-color':'background-color-gray']"
+                  :class="[record.sudokuRecord.sudokuHoles[i][j]?'input-color':'background-color-gray']"
                   :value="data"
                   class="sudoku-number-input"
                   disabled
@@ -26,16 +26,16 @@
             </div>
           </td>
           <td>
-            {{ record.sudokuLevelName }}
+            {{ record.sudokuRecord.sudokuLevelName }}
           </td>
           <td>
-            {{ formatEmptyData(record.startTime) }}
+            {{ formatEmptyData(record.sudokuRecord.startTime) }}
           </td>
           <td>
-            {{ formatEmptyData(record.endTime) }}
+            {{ formatEmptyData(record.sudokuRecord.endTime) }}
           </td>
           <td>
-            <i :class="[record.correct ? 'checkmark green' : 'remove red']" class="icon" />
+            <i :class="[record.answerSituation === 0 ? 'checkmark green' : 'remove red']" class="icon" />
           </td>
         </tr>
       </tbody>
@@ -55,10 +55,6 @@ import Loader from '@/components/Loader/index'
 import { getDefaultPageInformation } from '@/components/PaginationMenu/PaginationMenu'
 import { formatEmptyData } from '@/utils/publicUtils'
 import {
-  convertToSudokuHoles,
-  convertToSudokuMatrix
-} from '@/utils/sudokuUtils'
-import {
   getHistoryGameRecordById
 } from '@/api/userApi'
 import PaginationMenu from '@/components/PaginationMenu/index'
@@ -75,7 +71,7 @@ export default {
   data() {
     return {
       pageInformation: getDefaultPageInformation(),
-      recordData: [],
+      gameRecord: [],
       loaderShow: false
     }
   },
@@ -101,22 +97,10 @@ export default {
       const { success, data } = await getHistoryGameRecordById(this.userId, page, pageSize)
       this.loaderShow = false
       if (success) {
-        this.recordData = this.convertGameRecordToMatrix(data.list)
+        this.gameRecord = data.list
         this.pageInformation = data.pageInformation
         this.scrollToHeader()
       }
-    },
-    /**
-     * 转换游戏记录中的数独矩阵和空缺字符串为二维数组
-     * @param recordData 游戏记录数据
-     * @returns {Object} 处理后的游戏记录数据
-     */
-    convertGameRecordToMatrix(recordData) {
-      for (let i = 0, size = recordData.length; i < size; i++) {
-        recordData[i].sudokuMatrix = convertToSudokuMatrix(recordData[i].sudokuMatrix)
-        recordData[i].sudokuHoles = convertToSudokuHoles(recordData[i].sudokuHoles)
-      }
-      return recordData
     },
     /**
      * 滚动到头部

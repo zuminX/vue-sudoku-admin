@@ -106,6 +106,7 @@ const originalPush = VueRouter.prototype.push
 
 /**
  * 解决重定向时报错
+ *
  * @param location
  * @param onResolve
  * @param onReject

@@ -26,7 +26,7 @@
         </div>
         <div class="ui statistic">
           <div class="value">
-            {{ overviewGameInformation.averageSpendTime }}
+            {{ formatEmptyData(overviewGameInformation.averageSpendTime) }}
           </div>
           <div class="label">
             各模式的平均用时(秒)
@@ -34,7 +34,7 @@
         </div>
         <div class="ui statistic">
           <div class="value">
-            {{ overviewGameInformation.minSpendTime }}
+            {{ formatEmptyData(overviewGameInformation.minSpendTime) }}
           </div>
           <div class="label">
             最短用时(秒)
@@ -42,7 +42,7 @@
         </div>
         <div class="statistic">
           <div class="value">
-            {{ overviewGameInformation.maxSpendTime }}
+            {{ formatEmptyData(overviewGameInformation.maxSpendTime) }}
           </div>
           <div class="label">
             最长用时(秒)
@@ -70,7 +70,7 @@
         </div>
         <div class="statistic">
           <div class="value">
-            {{ information.averageSpendTime }}
+            {{ formatEmptyData(information.averageSpendTime) }}
           </div>
           <div class="label">
             平均用时(秒)
@@ -78,7 +78,7 @@
         </div>
         <div class="statistic">
           <div class="value">
-            {{ information.minSpendTime }}
+            {{ formatEmptyData(information.minSpendTime) }}
           </div>
           <div class="label">
             最短用时(秒)
@@ -86,7 +86,7 @@
         </div>
         <div class="statistic">
           <div class="value">
-            {{ information.maxSpendTime }}
+            {{ formatEmptyData(information.maxSpendTime) }}
           </div>
           <div class="label">
             最长用时(秒)
@@ -145,6 +145,7 @@ export default {
     initMenuItem('.menu .item')
   },
   methods: {
+    formatEmptyData,
     /**
      * 初始化用户游戏信息
      */
@@ -152,33 +153,26 @@ export default {
       const { success, data } = await getUserGameInformationById(this.userId)
       if (success) {
         this.overviewGameInformation = this.calculateOverviewGameInformation(data)
-        this.gameInformationList = this.formatSpendTime(data)
+        this.gameInformationList = data
       }
     },
     /**
      * 根据各模式的游戏信息，计算出总的游戏信息
+     *
+     * @param data 游戏信息
+     * @return {*} 总体游戏信息
      */
     calculateOverviewGameInformation(data) {
       const total = this.calculateTotal(data)
       const correctNumber = this.calculateCorrectNumber(data)
-      const averageSpendTime = formatShowMS(this.calculateAverageSpendTime(data))
-      const minSpendTime = formatShowMS(this.calculateMinSpendTime(data))
-      const maxSpendTime = formatShowMS(this.calculateMaxSpendTime(data))
+      const averageSpendTime = this.calculateAverageSpendTime(data)
+      const minSpendTime = this.calculateMinSpendTime(data)
+      const maxSpendTime = this.calculateMaxSpendTime(data)
       return { total, correctNumber, averageSpendTime, minSpendTime, maxSpendTime }
     },
     /**
-     * 格式化花费的时间
-     */
-    formatSpendTime(data) {
-      for (const item of data) {
-        item.averageSpendTime = formatShowMS(item.averageSpendTime)
-        item.minSpendTime = formatShowMS(item.minSpendTime)
-        item.maxSpendTime = formatShowMS(item.maxSpendTime)
-      }
-      return data
-    },
-    /**
      * 计算平均花费时间
+     *
      * @param data 游戏信息
      * @returns {null|number} 若回答正确数为零，则返回null；否则返回平均花费时间
      */
@@ -193,6 +187,7 @@ export default {
     },
     /**
      * 计算最少花费时间
+     *
      * @param data 游戏信息
      * @returns {number} 最少花费时间
      */
@@ -202,6 +197,7 @@ export default {
     },
     /**
      * 计算最多花费时间
+     *
      * @param data 游戏信息
      * @returns {number} 最多花费时间
      */
@@ -211,6 +207,7 @@ export default {
     },
     /**
      * 计算游戏总数
+     *
      * @param data 游戏信息
      * @returns {number} 游戏总数
      */
