@@ -1,5 +1,5 @@
 import { getRoleList } from '@/api/roleApi'
-import { getSudokuLevels } from '@/api/gameApi'
+import { getSudokuLevels } from '@/api/sudokuApi'
 
 export const constStore = {
   data: {
