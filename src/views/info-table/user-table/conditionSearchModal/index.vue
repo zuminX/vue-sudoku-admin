@@ -90,7 +90,7 @@ export default {
         createTimeRange: [new Date(), new Date()],
         recentLoginTimeRange: [new Date(), new Date()],
         roleNameList: [],
-        enabled: -1
+        enabled: '-1'
       }
     }
   },
@@ -101,7 +101,7 @@ export default {
     handleCheck() {
       const searchUser = deepClone(this.form)
       const enabled = this.form.enabled
-      searchUser.enabled = enabled === -1 ? null : (enabled === 1)
+      searchUser.enabled = enabled === '-1' ? null : (enabled === '1')
       const createTimeRange = searchUser.createTimeRange
       if (createTimeRange) {
         searchUser.createTimeRange = {

@@ -1,7 +1,6 @@
 const Webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 
 function resolve(dir) {
@@ -58,7 +57,7 @@ module.exports = {
         test: /\.js$|\.css$|\.jpg$/,
         threshold: 10240,
         minRatio: 0.8
-      }),
+      })
     ]
     // 打包优化，去除console.log
     config.optimization.minimizer.push(new UglifyJsPlugin({
