@@ -1,25 +1,33 @@
 import {
-  getRequest
-} from './basicApi'
+  request
+} from './index'
+import { APIInfo } from '@/api/APIInfo'
 
 /**
  * 统计信息API的基地址
  */
-const base = '/statistics'
+const baseUrl = 'statistics'
+
+const statisticsAPI = {
+  getRecentStatisticsUserData: new APIInfo('user/recentDate', baseUrl),
+  getUserTotal: new APIInfo('user/total', baseUrl),
+  getRecentStatisticsGameTotal: new APIInfo('game/recentTotal', baseUrl),
+  getGameTotal: new APIInfo('game/total', baseUrl)
+}
 
 /**
  * 获取最近的用户统计数据
  * @param date 统计日期名
  */
 export const getRecentStatisticsUserData = (date) => {
-  return getRequest(`${base}/user/recentDate`, { date })
+  return request(statisticsAPI.getRecentStatisticsUserData, { date })
 }
 
 /**
  * 获取系统的用户总数
  */
 export const getUserTotal = () => {
-  return getRequest(`${base}/user/total`)
+  return request(statisticsAPI.getUserTotal)
 }
 
 /**
@@ -27,12 +35,12 @@ export const getUserTotal = () => {
  * @param date 统计日期名
  */
 export const getRecentStatisticsGameTotal = (date) => {
-  return getRequest(`${base}/game/recentTotal`, { date })
+  return request(statisticsAPI.getRecentStatisticsGameTotal, { date })
 }
 
 /**
  * 获取系统游戏总局数
  */
 export const getGameTotal = () => {
-  return getRequest(`${base}/game/total`)
+  return request(statisticsAPI.getGameTotal)
 }
