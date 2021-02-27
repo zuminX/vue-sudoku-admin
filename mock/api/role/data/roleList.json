@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "code": 0,
+  "httpStatus": 200,
+  "message": null,
+  "data": [
+    {
+      "name": "ROLE_USER",
+      "nameZh": "用户"
+    },
+    {
+      "name": "ROLE_ADMIN",
+      "nameZh": "管理员"
+    }
+  ]
+}

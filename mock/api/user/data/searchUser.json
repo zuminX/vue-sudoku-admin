@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "code": 0,
+  "httpStatus": 200,
+  "message": null,
+  "data": {
+    "pageInformation": {
+      "totalPage": 1,
+      "currentPage": 1,
+      "pageSize": 5
+    },
+    "list": [
+      {
+        "id": 1,
+        "username": "test1",
+        "nickname": "测试管理员",
+        "createTime": "2021-01-23T16:13:22",
+        "recentLoginTime": "2021-02-27T15:37:59",
+        "enabled": true,
+        "roleList": [
+          {
+            "name": "ROLE_USER",
+            "nameZh": "用户"
+          },
+          {
+            "name": "ROLE_ADMIN",
+            "nameZh": "管理员"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "username": "test2",
+        "nickname": "测试用户",
+        "createTime": "2021-01-23T00:13:22",
+        "recentLoginTime": "2021-01-23T00:13:22",
+        "enabled": false,
+        "roleList": [
+          {
+            "name": "ROLE_USER",
+            "nameZh": "用户"
+          }
+        ]
+      }
+    ]
+  }
+}

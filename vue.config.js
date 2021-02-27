@@ -10,6 +10,8 @@ function resolve(dir) {
 
 const production = process.env.NODE_ENV === 'production'
 
+const port = process.env.port || process.env.npm_config_port || 9527 // dev port
+
 // 反向代理
 const proxyObj = {}
 proxyObj['/'] = {
@@ -77,9 +79,17 @@ module.exports = {
   },
   publicPath: production ? '/admin/' : '/',
   // 测试时的端口和反向代理到服务器
+  // devServer: {
+  //   host: 'localhost',
+  //   port: 8082,
+  //   proxy: proxyObj
+  // },
   devServer: {
-    host: 'localhost',
-    port: 8082,
-    proxy: proxyObj
+    port,
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    }
   }
 }
