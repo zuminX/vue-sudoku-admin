@@ -1,10 +1,10 @@
 <template>
-  <div class="ui two column grid centered">
-    <div class="ui toggle checkbox column tip-popup" data-content="实时校验数独矩阵的合法性">
+  <div class="ui two row grid centered">
+    <div class="ui toggle checkbox row tip-popup" data-content="实时校验数独矩阵的合法性">
       <input id="realTimeVerificationCheckbox" v-model="realTimeVerification" type="checkbox">
       <label for="realTimeVerificationCheckbox">实时校验</label>
     </div>
-    <div class="column">
+    <div class="row">
       <div class="ui selection dropdown">
         <i class="dropdown icon" />
         <div class="default text">根据难度随机生成</div>

@@ -13,6 +13,10 @@ import '@/assets/styles/index.scss'
 
 Vue.config.productionTip = false
 
+if (process.env.VUE_APP_MOCK && process.env.NODE_ENV === 'development') {
+  require('../mock')
+}
+
 new Vue({
   router,
   store,
