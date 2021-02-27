@@ -39,7 +39,7 @@ export default {
      * 校验表单
      */
     validaForm() {
-      FormValidation.validateForm(this.formId)
+      return FormValidation.validateForm(this.formId)
     }
   }
 }

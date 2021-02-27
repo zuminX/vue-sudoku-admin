@@ -44,7 +44,7 @@ export default {
      * 校验竞赛信息表单
      */
     validaForm() {
-      this.$refs.raceInformationForm.validaForm()
+      return this.$refs.raceInformationForm.validaForm()
     },
     /**
      * 设置竞赛信息表单验证规则
