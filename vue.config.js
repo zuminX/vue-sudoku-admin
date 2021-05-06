@@ -16,10 +16,28 @@ const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 const proxyObj = {}
 proxyObj['/'] = {
   ws: false,
-  target: 'http://localhost:8081',
+  target: 'http://localhost:9999',
   changeOrigin: true,
   pathRewrite: {
     '^/': ''
+  }
+}
+
+function getDevServer() {
+  if (process.env.VUE_APP_MOCK === 'true' && process.env.NODE_ENV === 'development') {
+    return {
+      port,
+      open: true,
+      overlay: {
+        warnings: false,
+        errors: true
+      }
+    }
+  }
+  return {
+    host: 'localhost',
+    port: 8080,
+    proxy: proxyObj
   }
 }
 
@@ -79,17 +97,5 @@ module.exports = {
   },
   publicPath: production ? '/admin/' : '/',
   // 测试时的端口和反向代理到服务器
-  // devServer: {
-  //   host: 'localhost',
-  //   port: 8082,
-  //   proxy: proxyObj
-  // },
-  devServer: {
-    port,
-    open: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    }
-  }
+  devServer: getDevServer()
 }

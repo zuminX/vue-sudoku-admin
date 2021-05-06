@@ -1,12 +1,12 @@
 import {
   request
-} from '@/api/index'
+} from '@/api'
 import { APIInfo } from '@/api/APIInfo'
 
 /**
  * 角色API的基地址
  */
-const baseUrl = 'role'
+const baseUrl = 'admin/role'
 
 const roleAPI = {
   getRoleList: new APIInfo('roleList', baseUrl)

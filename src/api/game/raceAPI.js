@@ -1,12 +1,12 @@
 import {
   request
-} from '@/api/index'
+} from '@/api'
 import { APIInfo } from '@/api/APIInfo'
 
 /**
  * 数独游戏竞赛API的基地址
  */
-const baseUrl = 'gameRace'
+const baseUrl = 'game/race'
 
 const gameRaceAPI = {
   publishRace: new APIInfo('publishPublicRace', baseUrl, 'post'),

@@ -102,9 +102,7 @@ import {
   formatEmptyData,
   initMenuItem
 } from '@/utils/publicUtils'
-import {
-  getUserGameInformationById
-} from '@/api/userApi'
+import { getUserGameInformationById } from '@/api/game/userAPI'
 
 import('jquery-address')
 

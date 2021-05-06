@@ -8,7 +8,7 @@
         v-for="(role, i) in roleList"
         :key="i"
         :class="[disabledAdmin && roleNameHasAdmin(role.name) ? 'disabled' : '']"
-        :data-text="role.nameZh"
+        :data-text="role.nickname"
         :data-value="role.name"
         class="item"
       >

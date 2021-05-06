@@ -19,7 +19,7 @@
             <td>{{ user.nickname }}</td>
             <td>
               <div class="ui basic labels">
-                <a v-for="(role, j) in user.roleList" :key="j" class="ui label">{{ role.nameZh }}</a>
+                <a v-for="(role, j) in user.roleList" :key="j" class="ui label">{{ role.nickname }}</a>
               </div>
             </td>
             <td>{{ parseStringTime(user.createTime) }}</td>
@@ -52,15 +52,15 @@
 
 <script>
 import { roleListHasAdmin } from '@/utils/coreUtils'
-import {
-  getUserList,
-  searchUser,
-  searchUserByName
-} from '@/api/userApi'
 import { getDefaultPageInformation } from '@/components/PaginationMenu/PaginationMenu'
 import { parseStringTime } from '@/utils/tool'
 import PaginationMenu from '@/components/PaginationMenu/index'
 import Loader from '@/components/Loader/index'
+import {
+  getUserList,
+  searchUser,
+  searchUserByName
+} from '@/api/admin/userAPI'
 
 export default {
   name: 'UserInfoTable',

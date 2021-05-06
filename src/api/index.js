@@ -15,7 +15,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 axios.interceptors.request.use(config => {
   const token = getData('token')
   if (token) {
-    config.headers['Authorization'] = `token:${token}`
+    config.headers['Authorization'] = `bearer ${token}`
   }
   return config
 }, error => {

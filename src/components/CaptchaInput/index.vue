@@ -14,7 +14,8 @@
 </template>
 
 <script>
-import { captchaImage } from '@/api/securityApi'
+
+import { captchaImage } from '@/api/auth/captchaAPI'
 
 export default {
   name: 'CaptchaInput',

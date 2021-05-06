@@ -1,0 +1,27 @@
+/*数独数字*/
+.number {
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+
+/*数独行*/
+.sudoku-row::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+/*数独数字输入框*/
+.sudoku-number-input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: 1px solid;
+}
+
+.sudoku-number-input:disabled {
+  background: #ffffff;
+}

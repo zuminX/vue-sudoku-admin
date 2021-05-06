@@ -14,10 +14,8 @@
 import { mapGetters } from 'vuex'
 import PanelGroup from '@/views/dashboard/components/PanelGroup'
 import LineChart from '@/views/dashboard/components/LineChart'
-import {
-  getRecentStatisticsGameTotal,
-  getRecentStatisticsUserData
-} from '@/api/statisticsApi'
+import { getRecentStatisticsUserData } from '@/api/admin/statisticsUserAPI'
+import { getRecentStatisticsGameTotal } from '@/api/game/statisticsGameAPI'
 
 export default {
   name: 'Dashboard',

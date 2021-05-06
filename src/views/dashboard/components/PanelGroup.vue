@@ -35,10 +35,8 @@
 
 <script>
 import CountTo from 'vue-count-to'
-import {
-  getGameTotal,
-  getUserTotal
-} from '@/api/statisticsApi'
+import { getUserTotal } from '@/api/admin/statisticsUserAPI'
+import { getGameTotal } from '@/api/game/statisticsGameAPI'
 
 export default {
   components: {

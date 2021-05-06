@@ -54,10 +54,8 @@
 import Loader from '@/components/Loader/index'
 import { getDefaultPageInformation } from '@/components/PaginationMenu/PaginationMenu'
 import { formatEmptyData } from '@/utils/publicUtils'
-import {
-  getHistoryGameRecordById
-} from '@/api/userApi'
 import PaginationMenu from '@/components/PaginationMenu/index'
+import { getHistoryGameRecordById } from '@/api/game/userAPI'
 
 export default {
   name: 'UserGameRecordTable',

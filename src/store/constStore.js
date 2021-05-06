@@ -1,5 +1,5 @@
-import { getRoleList } from '@/api/roleApi'
-import { getSudokuLevels } from '@/api/sudokuApi'
+import { getSudokuLevels } from '@/api/game/levelAPI'
+import { getRoleList } from '@/api/admin/roleAPI'
 
 export const constStore = {
   data: {
@@ -10,8 +10,10 @@ export const constStore = {
    * 获取数独等级列表
    * @returns {Promise<*>} 数独等级列表
    */
-  getSudokuLevelList() {
-    return this._singletonRequest(getSudokuLevels, '_sudokuLevelList')
+  async getSudokuLevelList() {
+    const result = await this._singletonRequest(getSudokuLevels, '_sudokuLevelList')
+    result.sort((level1, level2) => level1.sort - level2.sort)
+    return result
   },
   /**
    * 获取排行名列表

@@ -1,16 +1,14 @@
-import {
-  request
-} from './index'
 import { APIInfo } from '@/api/APIInfo'
+import { request } from '@/api'
 
 /**
- * 安全相关API的基地址
+ * 用户安全API的基地址
  */
-const baseUrl = 'security'
+const baseUrl = 'ums/security'
 
 const securityAPI = {
   login: new APIInfo('login', baseUrl, 'post'),
-  captchaImage: new APIInfo('captchaImage', baseUrl)
+  logout: new APIInfo('logout', baseUrl, 'post')
 }
 
 /**
@@ -22,8 +20,8 @@ export const login = (loginForm) => {
 }
 
 /**
- * 获取验证码
+ * 退出登录
  */
-export const captchaImage = () => {
-  return request(securityAPI.captchaImage)
+export const logout = () => {
+  return request(securityAPI.logout)
 }
